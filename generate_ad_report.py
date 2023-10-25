@@ -9,8 +9,9 @@ def main():
 	ssm_file = open("get_ad_ssm.json")
 	ssm_json = ssm_file.read()
 
-	sample_data = {"target_env":"Deltekdev"}
-	target_env = sample_data['target_env']
+	env_file = open("temp_env.txt")
+	target_environment = env_file.read()
+	target_environment = target_environment.replace("\n","")
 
 	instance_ids = {
 		"Deltekdev":"i-04d0e953afe07b3a3",
