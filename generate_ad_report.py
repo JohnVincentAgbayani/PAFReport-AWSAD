@@ -26,7 +26,6 @@ def main():
 	ssm_client = boto3.client('ssm', region_name="us-east-1")
 	target_instance = instance_ids[target_env]
 	target_bucket = f'infrasre-adreport-raw-{target_env.lower()}'
-	print(target_bucket)
 
 	ssm_create_response = ssm_client.create_document(Content = ssm_json, Name = ssm_doc_name, DocumentType = 'Command', DocumentFormat = 'JSON', TargetType =  "/AWS::EC2::Instance")
 
@@ -38,7 +37,7 @@ def main():
 	ssm_delete_response = ssm_client.delete_document(Name=ssm_doc_name)
 
 	#get output from s3
-	time.sleep(10)
+	time.sleep(60)
 	s3_client = boto3.client('s3')
 	s3_download_path = f'{cmd_id}/{target_instance}/awsrunPowerShellScript/RunADReport/stdout'
 
