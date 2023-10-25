@@ -11,7 +11,7 @@ def main():
 
 	env_file = open("temp_env.txt")
 	target_environment = env_file.read()
-	target_environment = target_environment.replace("\n","")
+	target_env = target_environment.replace("\n","")
 
 	instance_ids = {
 		"Deltekdev":"i-04d0e953afe07b3a3",
