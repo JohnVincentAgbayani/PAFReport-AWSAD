@@ -15,7 +15,7 @@ def main():
 
 	instance_ids = {
 		"Deltekdev":"i-04d0e953afe07b3a3",
-		"DCO":"i-04eb952554db2e110",
+		"DCO":"i-0fe3ff3ff41c18b17",
 		"Costpoint":"i-84e48028",
 		"Flexplus":"i-0f2717bceb18eea6f",
 		"GlobalOSS":"i-04b225ae477c52288",
