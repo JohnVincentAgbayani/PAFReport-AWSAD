@@ -3,7 +3,7 @@ import boto3
 import json
 import time
 
-from datetime import datetime	
+from datetime import datetime, timedelta	
 
 def main():
 	ssm_file = open("get_ad_ssm.json")
@@ -77,7 +77,7 @@ def main():
 					append_df = pd.DataFrame(append_data, columns = ['USERNAME', 'EMAIL', 'EMPLOYEEID'])
 					base_df = pd.concat([base_df, append_df])
 
-	target_date = datetime.today() + datetime.timedelta(days=1)
+	target_date = datetime.today() + timedelta(days=1)
 	target_date = str(target_date.strftime('%Y-%m-%d'))
 	target_filename = f'{target_env}-ADreport-{target_date}.csv'
 	base_df.to_csv(str(target_filename), index=False)  
