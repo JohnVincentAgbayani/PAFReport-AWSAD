@@ -75,7 +75,8 @@ def main():
 					append_df = pd.DataFrame(append_data, columns = ['USERNAME', 'EMAIL', 'EMPLOYEEID'])
 					base_df = pd.concat([base_df, append_df])
 
-	target_date = str(datetime.today().strftime('%Y-%m-%d'))
+	target_date = datetime.today() + datetime.timedelta(days=1)
+	target_date = str(target_date.strftime('%Y-%m-%d'))
 	target_filename = f'{target_env}-ADreport-{target_date}.csv'
 	base_df.to_csv(str(target_filename), index=False)  
 
