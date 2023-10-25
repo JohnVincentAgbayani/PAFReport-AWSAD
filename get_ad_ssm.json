@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "2.2",
+  "description": "Command Document Example JSON Template",
+  "parameters": {},
+  "mainSteps": [
+    {
+      "action": "aws:runPowerShellScript",
+      "name": "RunADReport",
+      "inputs": {
+        "runCommand": [
+          "",
+          "$true_val = 'True'",
+          "$ad_query = '(Enabled -eq $true_val)'",
+          "Get-ADUser -Filter $ad_query -Properties SamAccountName, EmailAddress, EmployeeID | Select-Object SamAccountName, EmailAddress, EmployeeID",
+          ""
+        ]
+      }
+    }
+  ]
+}
