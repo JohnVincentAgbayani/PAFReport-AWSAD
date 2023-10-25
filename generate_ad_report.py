@@ -29,6 +29,7 @@ def main():
 
 	ssm_create_response = ssm_client.create_document(Content = ssm_json, Name = ssm_doc_name, DocumentType = 'Command', DocumentFormat = 'JSON', TargetType =  "/AWS::EC2::Instance")
 
+	print(f'\nGenrating AD Report for {target_env}\n')
 	ssm_run_response = ssm_client.send_command(InstanceIds = [target_instance], DocumentName=ssm_doc_name, DocumentVersion="$DEFAULT", TimeoutSeconds=120, OutputS3BucketName=target_bucket)
 	print(ssm_run_response)
 	cmd_id = ssm_run_response['Command']['CommandId']
@@ -50,6 +51,7 @@ def main():
 
 	base_df = pd.DataFrame(columns = ['USERNAME', 'EMAIL', 'EMPLOYEEID'])
 
+	print(f'\nConverting AD Report for {target_env} to CSV\n')
 	for user_data in stdout_split:
 		if "-" not in user_data and "SamAccountName" not in user_data:
 			user_data_split = user_data.split(" ")
