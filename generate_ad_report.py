@@ -36,7 +36,7 @@ def main():
 	print(f'{ssm_run_response}\n')
 	cmd_id = ssm_run_response['Command']['CommandId']
 
-	time.sleep(2)
+	time.sleep(5)
 	ssm_status_response = ssm_client.get_command_invocation(CommandId=cmd_id, InstanceId=target_instance)
 	while ssm_status_response['StatusDetails'] == "InProgress":
 		print(f'SSM command {cmd_id} is still executing in {target_env}, pausing for 30s')
