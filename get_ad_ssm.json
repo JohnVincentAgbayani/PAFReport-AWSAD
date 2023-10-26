@@ -22,7 +22,7 @@
           "$target_filename_s3 = $target_env+'-ADreport-'+$target_date+'.csv'",
           "$ad_query = '(Enabled -eq $true_val)'",
           "Get-ADUser -Filter $ad_query -Properties SamAccountName, EmailAddress, EmployeeID | Select-Object SamAccountName, EmailAddress, EmployeeID | Export-Csv -Path $target_filename",
-          "Write-S3Object -BucketName $target_bucket -Key $target_filename_s3 -File $target_filename"
+          "Write-S3Object -BucketName $target_bucket -Key $target_filename_s3 -File $target_filename",
           ""
         ]
       }
