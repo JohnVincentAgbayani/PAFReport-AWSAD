@@ -37,7 +37,7 @@ def main():
 	ssm_delete_response = ssm_client.delete_document(Name=ssm_doc_name)
 
 	#get output from s3
-	time.sleep(90)
+	time.sleep(60)
 	s3_client = boto3.client('s3')
 	s3_download_path = f'{cmd_id}/{target_instance}/awsrunPowerShellScript/RunADReport/stdout'
 
