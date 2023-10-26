@@ -34,6 +34,7 @@ def main():
 	print(ssm_run_response)
 	cmd_id = ssm_run_response['Command']['CommandId']
 
+	time.sleep(2)
 	status_response = ssm_client.get_command_invocation(CommandId=cmd_id, InstanceId=target_instance)
 	print(status_response)
 
