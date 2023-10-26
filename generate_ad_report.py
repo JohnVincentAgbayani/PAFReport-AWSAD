@@ -55,8 +55,9 @@ def main():
 
 	#CONVERT OUTPUT TO READABLE CSV
 
-	stdout_file = open("stdout.txt")
-	stdout_str = stdout_file.read()
+	with open("stdout.txt", 'rb') as f:
+  		stdout_str = f.read()
+
 	stdout_split = stdout_str.split("\n")
 
 	base_df = pd.DataFrame(columns = ['USERNAME', 'EMAIL', 'EMPLOYEEID'])
