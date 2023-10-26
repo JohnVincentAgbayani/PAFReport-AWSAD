@@ -6,6 +6,8 @@ import time
 from datetime import datetime, timedelta	
 
 def main():
+	#RAW REPORT GENERATION
+	
 	ssm_file = open("get_ad_ssm.json")
 	ssm_json = ssm_file.read()
 
@@ -35,13 +37,17 @@ def main():
 	cmd_id = ssm_run_response['Command']['CommandId']
 
 	time.sleep(2)
-	status_response = ssm_client.get_command_invocation(CommandId=cmd_id, InstanceId=target_instance)
-	print(status_response)
+	ssm_status_response = ssm_client.get_command_invocation(CommandId=cmd_id, InstanceId=target_instance)
+	while ssm_status_response['StatusDetails'] == "InProgress":
+		print(f'SSM command {cmd_id} is still executing in {target_env}, pausing for 30s')
+		time.sleep(30)
+		ssm_status_response = ssm_client.get_command_invocation(CommandId=cmd_id, InstanceId=target_instance)
 
 	ssm_delete_response = ssm_client.delete_document(Name=ssm_doc_name)
 
+	#S3 PROCESSING AND CONVERSION
+
 	#get output from s3
-	time.sleep(60)
 	s3_client = boto3.client('s3')
 	s3_download_path = f'{cmd_id}/{target_instance}/awsrunPowerShellScript/RunADReport/stdout'
 
