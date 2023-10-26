@@ -33,13 +33,13 @@ def main():
 
 	print(f'\nGenrating AD Report for {target_env}\n')
 	ssm_run_response = ssm_client.send_command(InstanceIds = [target_instance], DocumentName=ssm_doc_name, DocumentVersion="$DEFAULT", TimeoutSeconds=120, OutputS3BucketName=target_bucket)
-	print(ssm_run_response)
+	print(f'{ssm_run_response}\n')
 	cmd_id = ssm_run_response['Command']['CommandId']
 
 	time.sleep(2)
 	ssm_status_response = ssm_client.get_command_invocation(CommandId=cmd_id, InstanceId=target_instance)
 	while ssm_status_response['StatusDetails'] == "InProgress":
-		print(f'\nSSM command {cmd_id} is still executing in {target_env}, pausing for 30s\n')
+		print(f'SSM command {cmd_id} is still executing in {target_env}, pausing for 30s')
 		time.sleep(30)
 		ssm_status_response = ssm_client.get_command_invocation(CommandId=cmd_id, InstanceId=target_instance)
 
