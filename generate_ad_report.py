@@ -16,7 +16,7 @@ def main():
 	instance_ids = {
 		"Deltekdev":"i-04d0e953afe07b3a3",
 		"DCO":"i-0fe3ff3ff41c18b17",
-		"Costpoint":"i-84e48028",
+		"Costpoint":"i-0e82a12d1ef934425",
 		"Flexplus":"i-0f2717bceb18eea6f",
 		"GlobalOSS":"i-04b225ae477c52288",
 		"Engdeltek":"i-0667aa10a44eafc7c",
@@ -77,8 +77,7 @@ def main():
 					append_df = pd.DataFrame(append_data, columns = ['USERNAME', 'EMAIL', 'EMPLOYEEID'])
 					base_df = pd.concat([base_df, append_df])
 
-	target_date = datetime.today() + timedelta(days=1)
-	target_date = str(target_date.strftime('%Y-%m-%d'))
+	target_date = str(datetime.today().strftime('%Y-%m-%d'))
 	target_filename = f'{target_env}-ADreport-{target_date}.csv'
 	base_df.to_csv(str(target_filename), index=False)  
 
