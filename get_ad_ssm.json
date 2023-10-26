@@ -1,12 +1,7 @@
 {
   "schemaVersion": "2.2",
   "description": "Command Document Example JSON Template",
-  "parameters": {
-    "Environment": {
-      "type": "String",
-      "description": "Target environment"
-    }
-  },
+  "parameters": {},
   "mainSteps": [
     {
       "action": "aws:runPowerShellScript",
@@ -15,14 +10,8 @@
         "runCommand": [
           "",
           "$true_val = 'True'",
-          "$target_env = '{{Environment}}'",
-          "$target_date = Get-Date -Format 'MM-dd-yy-HH_mm'",
-          "$target_bucket = 'infrasre-adreport-raw-'+$target_env.ToLower()",
-          "$target_filename = 'C:\\'+$target_env+'-ADreport-'+$target_date+'.csv'",
-          "$target_filename_s3 = $target_env+'-ADreport-'+$target_date+'.csv'",
           "$ad_query = '(Enabled -eq $true_val)'",
-          "Get-ADUser -Filter $ad_query -Properties SamAccountName, EmailAddress, EmployeeID | Select-Object SamAccountName, EmailAddress, EmployeeID | Export-Csv -Path $target_filename",
-          "Write-S3Object -BucketName $target_bucket -Key $target_filename_s3 -File $target_filename",
+          "Get-ADUser -Filter $ad_query -Properties SamAccountName, EmailAddress, EmployeeID | Select-Object SamAccountName, EmailAddress, EmployeeID",
           ""
         ]
       }
