@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 
 def main():
 	#RAW REPORT GENERATION
-	
+
 	ssm_file = open("get_ad_ssm.json")
 	ssm_json = ssm_file.read()
 
@@ -39,7 +39,7 @@ def main():
 	time.sleep(2)
 	ssm_status_response = ssm_client.get_command_invocation(CommandId=cmd_id, InstanceId=target_instance)
 	while ssm_status_response['StatusDetails'] == "InProgress":
-		print(f'SSM command {cmd_id} is still executing in {target_env}, pausing for 30s')
+		print(f'\nSSM command {cmd_id} is still executing in {target_env}, pausing for 30s\n')
 		time.sleep(30)
 		ssm_status_response = ssm_client.get_command_invocation(CommandId=cmd_id, InstanceId=target_instance)
 
