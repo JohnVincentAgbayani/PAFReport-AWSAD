@@ -59,6 +59,7 @@ def main():
   		stdout_str = f.read()
 
 	stdout_str = str(stdout_str)
+	print(stdout_str)
 	stdout_split = stdout_str.split("\n")
 
 	base_df = pd.DataFrame(columns = ['USERNAME', 'EMAIL', 'EMPLOYEEID'])
