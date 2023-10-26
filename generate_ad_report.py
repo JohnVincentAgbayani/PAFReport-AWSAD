@@ -53,12 +53,11 @@ def main():
 
 	s3_client.download_file(target_bucket, s3_download_path, "stdout.txt")
 
-	#CONVERT OUTPUT TO READABLE CSV
+	#convert output to readable csv
 
-	with open("stdout.txt", 'rb') as f:
-  		stdout_str = f.read()
+	with open("stdout.txt", encoding="utf8", errors='ignore') as f:
+			stdout_str = f.read()
 
-	stdout_str = str(stdout_str)
 	stdout_split = stdout_str.split("\n")
 
 	base_df = pd.DataFrame(columns = ['USERNAME', 'EMAIL', 'EMPLOYEEID'])
@@ -67,7 +66,6 @@ def main():
 	for user_data in stdout_split:
 		if "-" not in user_data and "SamAccountName" not in user_data:
 			user_data_split = user_data.split(" ")
-			print(user_data_split)
 			user_data_split = list(filter(None, user_data_split))
 
 			append_data = {"USERNAME":[""],"EMAIL":[""],"EMPLOYEEID":[""]}
@@ -93,6 +91,5 @@ def main():
 	target_date = str(datetime.today().strftime('%Y-%m-%d'))
 	target_filename = f'{target_env}-ADreport-{target_date}.csv'
 	base_df.to_csv(str(target_filename), index=False)  
-
 
 main()
