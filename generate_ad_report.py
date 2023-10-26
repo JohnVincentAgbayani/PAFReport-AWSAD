@@ -34,7 +34,7 @@ def main():
 	print(ssm_run_response)
 	cmd_id = ssm_run_response['Command']['CommandId']
 
-	status_response = ssm_client.get_command_invocation(CommandId=cmd_id)
+	status_response = ssm_client.get_command_invocation(CommandId=cmd_id, InstanceId=target_instance)
 	print(status_response)
 
 	ssm_delete_response = ssm_client.delete_document(Name=ssm_doc_name)
