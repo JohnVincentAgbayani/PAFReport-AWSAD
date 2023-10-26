@@ -59,7 +59,6 @@ def main():
   		stdout_str = f.read()
 
 	stdout_str = str(stdout_str)
-	print(stdout_str)
 	stdout_split = stdout_str.split("\n")
 
 	base_df = pd.DataFrame(columns = ['USERNAME', 'EMAIL', 'EMPLOYEEID'])
@@ -68,6 +67,7 @@ def main():
 	for user_data in stdout_split:
 		if "-" not in user_data and "SamAccountName" not in user_data:
 			user_data_split = user_data.split(" ")
+			print(user_data_split)
 			user_data_split = list(filter(None, user_data_split))
 
 			append_data = {"USERNAME":[""],"EMAIL":[""],"EMPLOYEEID":[""]}
